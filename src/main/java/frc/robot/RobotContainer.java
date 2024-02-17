@@ -29,8 +29,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-  // private final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
+  private final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   // private final ClimbSubsystem m_clilClimbSubsystem = new ClimbSubsystem();
+  private final IntakeNoteCommand m_IntakeNoteCommand = new IntakeNoteCommand(m_ShooterSubsystem);
+  private final ShootNoteCommand m_ShootNoteCommand = new ShootNoteCommand(m_ShooterSubsystem);
+
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
@@ -74,8 +77,8 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    // m_driverController.a().whileTrue(new ShootNoteCommand(m_ShooterSubsystem));
-    // m_driverController.b().whileTrue(new IntakeNoteCommand(m_ShooterSubsystem));
+    m_driverController.a().whileTrue(m_ShootNoteCommand);
+    m_driverController.b().whileTrue(m_IntakeNoteCommand);
   }
 
   /**
