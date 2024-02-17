@@ -66,8 +66,8 @@ public final class Constants {
   }
   public static final class SubsystemConstants {
 
-    public static final int kLeftShooterCanId = 21;
-    public static final int kLeftFeederCanId = 22;
+    public static final int kLeftShooterCanId = 22;
+    public static final int kLeftFeederCanId = 21;
     public static final int kRightShooterCanId = 23;
     public static final int kRightFeederCanId = 24;
 
