@@ -24,15 +24,18 @@ public class ShooterSubsystem extends SubsystemBase {
     m_rightShooter.restoreFactoryDefaults();
     m_rightFeeder.restoreFactoryDefaults();
 
+    //m_leftShooter.setInverted(true);
+    //m_leftFeeder.setInverted(true);
+
     m_leftShooter.setIdleMode(IdleMode.kCoast);
     m_leftFeeder.setIdleMode(IdleMode.kCoast);
     m_rightShooter.setIdleMode(IdleMode.kCoast);
     m_rightFeeder.setIdleMode(IdleMode.kCoast);
 
     m_rightShooter.follow(m_leftShooter);
-    m_rightShooter.setInverted(true);
+    //m_rightShooter.setInverted(true);
     m_rightFeeder.follow(m_leftFeeder);
-    m_rightFeeder.setInverted(true);
+    //m_rightFeeder.setInverted(true);
   }
 
   @Override
