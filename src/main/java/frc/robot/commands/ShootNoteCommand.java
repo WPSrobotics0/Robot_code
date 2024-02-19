@@ -20,7 +20,7 @@ public class ShootNoteCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.setShooterSpeed(1);
+    m_shooter.setShooterSpeed(-1);
     ticks = 0;
   }
 
@@ -29,7 +29,7 @@ public class ShootNoteCommand extends Command {
   public void execute() {
     ticks +=1;
     if (ticks == 25) {
-      m_shooter.setFeederSpeed(1);
+      m_shooter.setFeederSpeed(-1);
     }
   }
   
