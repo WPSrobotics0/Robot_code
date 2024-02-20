@@ -27,7 +27,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 4.8;
+    public static final double kMaxSpeedMetersPerSecond = 4.8/2;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     public static final double kDirectionSlewRate = 1.2; // radians per second
@@ -46,10 +46,10 @@ public final class Constants {
         new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
     // Angular offsets of the modules relative to the chassis in radians
-    public static final double kFrontLeftChassisAngularOffset = 0;
-    public static final double kFrontRightChassisAngularOffset = Math.PI / 2 + Math.PI;
-    public static final double kBackLeftChassisAngularOffset = Math.PI / 2;
-    public static final double kBackRightChassisAngularOffset = 0;
+    public static final double kFrontLeftChassisAngularOffset = Math.PI;
+    public static final double kFrontRightChassisAngularOffset = Math.PI / 2;
+    public static final double kBackLeftChassisAngularOffset = Math.PI / 2 + Math.PI;
+    public static final double kBackRightChassisAngularOffset = Math.PI;
 
     // SPARK MAX CAN IDs
     public static final int kFrontLeftDrivingCanId = 3;
@@ -66,8 +66,8 @@ public final class Constants {
   }
   public static final class SubsystemConstants {
 
-    public static final int kLeftShooterCanId = 21;
-    public static final int kLeftFeederCanId = 22;
+    public static final int kLeftShooterCanId = 22;
+    public static final int kLeftFeederCanId = 21;
     public static final int kRightShooterCanId = 23;
     public static final int kRightFeederCanId = 24;
 
