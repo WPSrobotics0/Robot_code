@@ -5,7 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.Autos;
+//import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeNoteCommand;
 import frc.robot.commands.ShootNoteCommand;
@@ -86,8 +86,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  /*public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return Autos.exampleAuto(m_exampleSubsystem);
-  }
+  } */
 }

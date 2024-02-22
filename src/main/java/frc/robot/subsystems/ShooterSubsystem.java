@@ -12,6 +12,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
+
+  public enum ShooterLocation
+  {
+    Generic,
+    Trap,
+    CenterSpeaker,
+    LeftSpeaker,
+    RightSpeaker,
+    Amp,
+    SourceLoad,
+  };
+
   private final CANSparkMax m_leftShooter = new CANSparkMax(SubsystemConstants.kLeftShooterCanId, MotorType.kBrushed);
   private final CANSparkMax m_leftFeeder = new CANSparkMax(SubsystemConstants.kLeftFeederCanId, MotorType.kBrushed);
   private final CANSparkMax m_rightShooter = new CANSparkMax(SubsystemConstants.kRightShooterCanId, MotorType.kBrushed);

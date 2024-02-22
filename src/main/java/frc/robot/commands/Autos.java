@@ -120,7 +120,7 @@ private static Command centerShootAndPickUpCenterNoteAndLeave(RobotContainer con
     // .andThen(new AutoBalanceCommand(driveSubsystem));
     // }
 
-    */
+    
     public static Command runPath(String name, HashMap<String, Command> events, DriveSubsystem driveSubsystem) {
         // var trajectory = PathPlanner.loadPath(name, new PathConstraints(3, 2));
         // SwerveAutoBuilder builder = new SwerveAutoBuilder(
@@ -156,7 +156,7 @@ private static Command centerShootAndPickUpCenterNoteAndLeave(RobotContainer con
 
         return fullAuto;
     }
-/*
+
 
     public static Command placePiece(RobotContainer container) {
         return new InstantCommand(() -> {});
