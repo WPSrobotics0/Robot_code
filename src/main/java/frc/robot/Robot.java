@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.MAXSwerveModule;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,7 +20,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  private int autocounter;
+  private DriveSubsystem autondrivetrain;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -55,18 +58,29 @@ public class Robot extends TimedRobot {
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. 
   @Override
+  */
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    /*m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    */
+    autondrivetrain= new DriveSubsystem();
+    autocounter=0;
   }
 
   /** This function is called periodically during autonomous. 
   @Override
-  public void autonomousPeriodic() {}
+  */
+  public void autonomousPeriodic() {
+    if (autocounter!=50){
+      autondrivetrain.drive(1,0,0,false,false);
+      autocounter++;
+    }
+    
+  }
 
   @Override
   public void teleopInit() {

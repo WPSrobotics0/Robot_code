@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+/*
 package frc.robot.commands;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShooterSubsystem.ShooterLocation;
-
+ */
 
 /* 
 public final class Autos {
@@ -121,7 +121,7 @@ private static Command centerShootAndPickUpCenterNoteAndLeave(RobotContainer con
     // }
 
     */
-    public static Command runPath(String name, HashMap<String, Command> events, DriveSubsystem driveSubsystem) {
+    //public static Command runPath(String name, HashMap<String, Command> events, DriveSubsystem driveSubsystem) {
         // var trajectory = PathPlanner.loadPath(name, new PathConstraints(3, 2));
         // SwerveAutoBuilder builder = new SwerveAutoBuilder(
         //         driveSubsystem::getPose,
@@ -134,12 +134,12 @@ private static Command centerShootAndPickUpCenterNoteAndLeave(RobotContainer con
         //         true,
         //         driveSubsystem);
 
-        Command fullAuto = new InstantCommand(() -> {});// builder.fullAuto(trajectory);
+       // Command fullAuto = new InstantCommand(() -> {});// builder.fullAuto(trajectory);
 
-        return fullAuto;
-    }
+        //return fullAuto;
+    //}
 
-    public static Command runPath(String name, DriveSubsystem driveSubsystem) {
+   // public static Command runPath(String name, DriveSubsystem driveSubsystem) {
         // var trajectory = PathPlanner.loadPath(name, new PathConstraints(4, 2));
         // SwerveAutoBuilder builder = new SwerveAutoBuilder(
         //         driveSubsystem::getPose,
@@ -152,10 +152,10 @@ private static Command centerShootAndPickUpCenterNoteAndLeave(RobotContainer con
         //         true,
         //         driveSubsystem);
 
-        Command fullAuto = new InstantCommand(() -> {});// builder.fullAuto(trajectory);
+  //      Command fullAuto = new InstantCommand(() -> {});// builder.fullAuto(trajectory);
 
-        return fullAuto;
-    }
+   //     return fullAuto;
+   // }
 /*
 
     public static Command placePiece(RobotContainer container) {
