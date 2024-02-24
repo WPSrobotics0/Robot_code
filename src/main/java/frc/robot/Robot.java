@@ -19,8 +19,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private int autocounter;
-  private DriveSubsystem autondrivetrain;
+  private int autoCounter;
+  private DriveSubsystem autoDriveTrain;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -66,17 +66,17 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
     
-    autondrivetrain= new DriveSubsystem();
-    autocounter=0;
+    autoDriveTrain= new DriveSubsystem();
+    autoCounter=0;
   }
 
   /** This function is called periodically during autonomous. 
   @Override
   
   public void autonomousPeriodic() {
-    if (autocounter!=50){
-      autondrivetrain.drive(1,0,0,false,false);
-      autocounter++;
+    if (autoCounter<=50){
+      autoDriveTrain.drive(1,0,0,true,false);
+      autoCounter++;
     }
     
   }
