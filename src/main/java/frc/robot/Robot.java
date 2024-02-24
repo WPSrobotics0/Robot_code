@@ -19,7 +19,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private int autoCounter;
+  /*private int autoCounter;
   private DriveSubsystem autoDriveTrain;
   /**
    * This function is run when the robot is first started up and should be used for any
