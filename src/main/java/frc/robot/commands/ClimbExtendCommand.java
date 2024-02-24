@@ -21,13 +21,13 @@ public class ClimbExtendCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climb.setExtendSpeed(1);
+    m_climb.setExtendSpeed(0.01);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climb.setExtendSpeed(1);
+    m_climb.setExtendSpeed(0.01);
   }
 
   // Called once the command ends or is interrupted.
