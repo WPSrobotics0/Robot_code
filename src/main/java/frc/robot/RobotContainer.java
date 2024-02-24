@@ -14,6 +14,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -30,7 +31,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
-  // private final ClimbSubsystem m_clilClimbSubsystem = new ClimbSubsystem();
+  // private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final IntakeNoteCommand m_IntakeNoteCommand = new IntakeNoteCommand(m_ShooterSubsystem);
   private final ShootNoteCommand m_ShootNoteCommand = new ShootNoteCommand(m_ShooterSubsystem);
 
@@ -39,7 +40,10 @@ public class RobotContainer {
   // private final CommandXboxController m_driverController =
   //     new CommandXboxController(OIConstants.kDriverControllerPort);
   private final CommandXboxController m_driverController =
-      new CommandXboxController(OIConstants.kDriverControllerPort);
+      new CommandXboxController(OIConstants.kDriverControllerPort0);
+
+  private final CommandXboxController m_armController =
+      new CommandXboxController(OIConstants.kDriverControllerPort1);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -77,8 +81,8 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.a().whileTrue(m_ShootNoteCommand);
-    m_driverController.b().whileTrue(m_IntakeNoteCommand);
+    m_armController.rightTrigger(0.15).whileTrue(m_ShootNoteCommand);
+    m_armController.leftTrigger(0.15).whileTrue(m_IntakeNoteCommand);
   }
 
   /**
