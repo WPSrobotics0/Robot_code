@@ -4,12 +4,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.MAXSwerveModule;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -23,7 +21,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private int autocounter;
   private DriveSubsystem autondrivetrain;
-  private ADIS16470_IMU m_gyroscope;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -33,7 +30,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_gyroscope = new ADIS16470_IMU();
   }
 
   /**

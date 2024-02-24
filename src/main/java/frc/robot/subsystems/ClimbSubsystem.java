@@ -64,6 +64,8 @@ public class ClimbSubsystem extends SubsystemBase {
       SmartDashboard.putBoolean("Climb Data Update", false);
       SmartDashboard.putNumber("Climb P", kClimbP);
       SmartDashboard.putNumber("Climb I", kClimbI);
+      SmartDashboard.putNumber("Climb D", kClimbD);
+      SmartDashboard.putNumber("Climb FF", kClimbFF);
   }
 
   private void smartDashboardUpdate()
@@ -73,7 +75,10 @@ public class ClimbSubsystem extends SubsystemBase {
       if (SmartDashboard.getBoolean("Climb Data Update", false))
       {
         m_climbPid.setP(SmartDashboard.getNumber("Climb P", kClimbP));
-        
+        m_climbPid.setI(SmartDashboard.getNumber("Climb I", kClimbI));
+        m_climbPid.setD(SmartDashboard.getNumber("Climb D", kClimbD));
+        m_climbPid.setFF(SmartDashboard.getNumber("Climb FF", kClimbFF));
+
         SmartDashboard.putBoolean("Climb Data Update", false);
       }
 
