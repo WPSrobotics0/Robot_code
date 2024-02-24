@@ -5,11 +5,12 @@
 package frc.robot;
 
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.ClimbCommand;
 //import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeNoteCommand;
 import frc.robot.commands.ShootNoteCommand;
-//import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -31,9 +32,10 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
-  // private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
+  private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
   private final IntakeNoteCommand m_IntakeNoteCommand = new IntakeNoteCommand(m_ShooterSubsystem);
   private final ShootNoteCommand m_ShootNoteCommand = new ShootNoteCommand(m_ShooterSubsystem);
+  private final ClimbCommand m_ClimbCommand = new ClimbCommand(m_ClimbSubsystem);
 
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -83,6 +85,8 @@ public class RobotContainer {
 
     m_armController.rightTrigger(0.15).whileTrue(m_ShootNoteCommand);
     m_armController.leftTrigger(0.15).whileTrue(m_IntakeNoteCommand);
+
+    m_armController.leftBumper().whileTrue(m_ClimbCommand);
   }
 
   /**

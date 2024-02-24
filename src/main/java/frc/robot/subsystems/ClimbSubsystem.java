@@ -35,7 +35,9 @@ public class ClimbSubsystem extends SubsystemBase {
     m_climbMotor1.setIdleMode(IdleMode.kBrake);
     m_climbMotor2.setIdleMode(IdleMode.kBrake);
 
-    m_climbMotor2.follow(m_climbMotor1);
+    m_climbMotor2.follow(m_climbMotor1, false);
+
+
 
     m_climbPid = m_climbMotor1.getPIDController();
 
@@ -53,6 +55,14 @@ public class ClimbSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     smartDashboardUpdate();
+  }
+
+  public void setExtendSpeed(double speed) {
+    m_climbMotor1.set(speed);
+  }
+
+  public void setRetractSpeed(double speed) {
+    m_climbMotor1.set(-1 * speed);
   }
 
   public void smartDashboardInit()
