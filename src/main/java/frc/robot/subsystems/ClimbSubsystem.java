@@ -8,7 +8,7 @@ import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
+//import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,7 +20,7 @@ public class ClimbSubsystem extends SubsystemBase {
   private final CANSparkMax m_climbMotor2 = new CANSparkMax(SubsystemConstants.kClimbMotor2CanId, MotorType.kBrushed);
 
   private SparkPIDController m_climbPid;
-  private RelativeEncoder m_climbEncoder;
+  // private RelativeEncoder m_climbEncoder;
 
   private static double kClimbP = 0.01;
   private static double kClimbI = 0;
@@ -35,7 +35,7 @@ public class ClimbSubsystem extends SubsystemBase {
     m_climbMotor1.setIdleMode(IdleMode.kBrake);
     m_climbMotor2.setIdleMode(IdleMode.kBrake);
 
-    m_climbMotor2.follow(m_climbMotor1, false);
+    m_climbMotor2.follow(m_climbMotor1, true);
 
 
 
@@ -46,7 +46,7 @@ public class ClimbSubsystem extends SubsystemBase {
     m_climbPid.setD(kClimbD);
     m_climbPid.setFF(kClimbFF);
 
-    m_climbEncoder = m_climbMotor1.getEncoder();
+    // m_climbEncoder = m_climbMotor1.getEncoder();
 
     smartDashboardInit();
   }
@@ -67,7 +67,7 @@ public class ClimbSubsystem extends SubsystemBase {
 
   public void smartDashboardInit()
   {
-      SmartDashboard.putNumber("Climb Position", m_climbEncoder.getPosition());
+      // SmartDashboard.putNumber("Climb Position", m_climbEncoder.getPosition());
   
       SmartDashboard.putBoolean("Go To Climb Target", false);
 
@@ -80,7 +80,7 @@ public class ClimbSubsystem extends SubsystemBase {
 
   private void smartDashboardUpdate()
   {
-      SmartDashboard.putNumber("Climb Position", m_climbEncoder.getPosition());
+      // SmartDashboard.putNumber("Climb Position", m_climbEncoder.getPosition());
 
       if (SmartDashboard.getBoolean("Climb Data Update", false))
       {
