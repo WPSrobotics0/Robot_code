@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.aCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -38,8 +39,7 @@ public class RobotContainer {
   private final ShootNoteCommand m_ShootNoteCommand = new ShootNoteCommand(m_ShooterSubsystem);
   private final ClimbExtendCommand m_ClimbExtendCommand = new ClimbExtendCommand(m_ClimbSubsystem);
   private final ClimbRetractCommand m_ClimbRetractCommand = new ClimbRetractCommand(m_ClimbSubsystem);
-
-  
+  private boolean isa=false;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
   //     new CommandXboxController(OIConstants.kDriverControllerPort);
@@ -80,7 +80,7 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
-
+    
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
@@ -90,7 +90,11 @@ public class RobotContainer {
 
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
-    m_driverController.a().whileTrue();
+    isa=m_driverController.a().getAsBoolean();
+
+    if (isa) {
+      
+    }
   }
 
   /**
