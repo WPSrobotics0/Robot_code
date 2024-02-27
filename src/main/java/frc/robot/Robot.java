@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    gyro.calibr
+    //gyro.calibr
     m_robotContainer = new RobotContainer();
   }
 
@@ -124,6 +124,6 @@ public class Robot extends TimedRobot {
     int dev = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
     SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(dev, "Yaw"));
     angle.set(5.0);
-    m_gyroSim.setAngle();
+    //m_gyroSim.setAngle();
   }
 }
