@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
 
-public class aCommand extends Command {
+public class bCommand extends Command {
   /** Creates a new ShootNote. */
   private DriveSubsystem m_robodrive;
-  public aCommand(DriveSubsystem robodrive) {
+  public bCommand(DriveSubsystem robodrive) {
     addRequirements(robodrive);
     m_robodrive = robodrive;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,7 +22,7 @@ public class aCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_robodrive.driveMode=incrementSpeed(m_robodrive.driveMode);
+    m_robodrive.driveMode=decrementSpeed(m_robodrive.driveMode);
     m_robodrive.speedModifier=button(m_robodrive.speedModifier, m_robodrive.driveMode);
 
   }
@@ -48,9 +48,9 @@ public class aCommand extends Command {
       }
     return speedModifier;
   }
-  public int incrementSpeed(int speedMode){
-    if (speedMode<3){
-      return speedMode++;
+  public int decrementSpeed(int speedMode){
+    if (speedMode>=0){
+      return speedMode--;
     }
     else{
       return speedMode;
