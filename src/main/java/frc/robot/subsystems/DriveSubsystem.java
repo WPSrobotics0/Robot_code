@@ -46,6 +46,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   // The gyro sensor
   AHRS gyro = new AHRS(SPI.Port.kMXP);
+  
   public double speedModifier=1.0;
   // Slew rate filter variables for controlling lateral acceleration
   private double m_currentRotation = 0.0;

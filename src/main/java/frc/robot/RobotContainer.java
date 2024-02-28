@@ -39,7 +39,7 @@ public class RobotContainer {
   private final ShootNoteCommand m_ShootNoteCommand = new ShootNoteCommand(m_ShooterSubsystem);
   private final ClimbExtendCommand m_ClimbExtendCommand = new ClimbExtendCommand(m_ClimbSubsystem);
   private final ClimbRetractCommand m_ClimbRetractCommand = new ClimbRetractCommand(m_ClimbSubsystem);
-  private final aCommand mACommand=new aCommand(m_robotDrive);
+  private final aCommand m_ACommand=new aCommand(m_robotDrive);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
@@ -91,7 +91,7 @@ public class RobotContainer {
 
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
-    m_driverController.a().whileTrue(mACommand);
+    m_driverController.a().whileTrue(m_ACommand);
 
     
   }
