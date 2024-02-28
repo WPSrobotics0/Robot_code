@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj.SPI;
 import frc.robot.Constants.DriveConstants;
 import frc.utils.SwerveUtils;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.aCommand;
+
 
 public class DriveSubsystem extends SubsystemBase {
   // Create MAXSwerveModules
@@ -88,6 +90,8 @@ public class DriveSubsystem extends SubsystemBase {
    *
    * @return The pose.
    */
+
+   //NOT USED!!!
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
   }
@@ -97,6 +101,8 @@ public class DriveSubsystem extends SubsystemBase {
    *
    * @param pose The pose to which to set the odometry.
    */
+
+   //NOT USED!!!
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(
         Rotation2d.fromDegrees(gyro.getAngle()),
@@ -173,8 +179,8 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     // Convert the commanded speeds into the correct units for the drivetrain
-    double xSpeedDelivered = xSpeedCommanded * DriveConstants.kMaxSpeedMetersPerSecond;
-    double ySpeedDelivered = ySpeedCommanded * DriveConstants.kMaxSpeedMetersPerSecond;
+    double xSpeedDelivered = xSpeedCommanded * DriveConstants.kMaxSpeedMetersPerSecond;//*speedModifier
+    double ySpeedDelivered = ySpeedCommanded * DriveConstants.kMaxSpeedMetersPerSecond;//*speedModifier;
     double rotDelivered = m_currentRotation * DriveConstants.kMaxAngularSpeed;
 
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
@@ -192,6 +198,8 @@ public class DriveSubsystem extends SubsystemBase {
   /**
    * Sets the wheels into an X formation to prevent movement.
    */
+
+  //NOT USED!!!!
   public void setX() {
     m_frontLeft.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45)));
     m_frontRight.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(-45)));
@@ -204,6 +212,8 @@ public class DriveSubsystem extends SubsystemBase {
    *
    * @param desiredStates The desired SwerveModule states.
    */
+
+   //NOT USED!!!!
   public void setModuleStates(SwerveModuleState[] desiredStates) {
     SwerveDriveKinematics.desaturateWheelSpeeds(
         desiredStates, DriveConstants.kMaxSpeedMetersPerSecond);
@@ -214,6 +224,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   /** Resets the drive encoders to currently read a position of 0. */
+
+  //NOT USED!!!
   public void resetEncoders() {
     m_frontLeft.resetEncoders();
     m_rearLeft.resetEncoders();
@@ -222,6 +234,9 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   /** Zeroes the heading of the robot. */
+
+
+  //NOT USED!!!
   public void zeroHeading() {
     gyro.reset();
   }
@@ -231,6 +246,8 @@ public class DriveSubsystem extends SubsystemBase {
    *
    * @return the robot's heading in degrees, from -180 to 180
    */
+
+   //NOT USED!!!
   public double getHeading() {
     return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
   }
@@ -240,6 +257,8 @@ public class DriveSubsystem extends SubsystemBase {
    *
    * @return The turn rate of the robot, in degrees per second
    */
+
+  //NOT USED!!!
   public double getTurnRate() {
     return gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
