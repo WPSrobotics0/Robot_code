@@ -46,12 +46,12 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
   //     new CommandXboxController(OIConstants.kDriverControllerPort);
-  private final CommandXboxController m_driverController =
+  public final static CommandXboxController m_driverController =
       new CommandXboxController(OIConstants.kDriverControllerPort0);
 
-  private final CommandXboxController m_armController =
+  public final static CommandXboxController m_armController =
       new CommandXboxController(OIConstants.kDriverControllerPort1);
-
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -88,9 +88,10 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_armController.rightTrigger(0.15).whileTrue(m_ShootNoteCommand);
-    m_armController.leftTrigger(0.15).whileTrue(m_IntakeNoteCommand);
-
+    
+    m_armController.rightTrigger(0.05).whileTrue(m_ShootNoteCommand);
+    m_armController.leftTrigger(0.05).whileTrue(m_IntakeNoteCommand);
+    
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
     m_driverController.a().whileTrue(m_ACommand);
