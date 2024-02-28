@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.SPI;
 import frc.robot.Constants.DriveConstants;
 import frc.utils.SwerveUtils;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.aCommand;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 
 public class DriveSubsystem extends SubsystemBase {
@@ -45,9 +45,7 @@ public class DriveSubsystem extends SubsystemBase {
       DriveConstants.kBackRightChassisAngularOffset);
 
   // The gyro sensor
-  private final AHRS gyro = new AHRS(SPI.Port.kMXP);
-  //calibrate(gyro);
-
+  AHRS gyro = new AHRS(SPI.Port.kMXP);
   // Slew rate filter variables for controlling lateral acceleration
   private double m_currentRotation = 0.0;
   private double m_currentTranslationDir = 0.0;
@@ -91,7 +89,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The pose.
    */
 
-   //NOT USED!!!
+   
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
   }
@@ -102,7 +100,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @param pose The pose to which to set the odometry.
    */
 
-   //NOT USED!!!
+   
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(
         Rotation2d.fromDegrees(gyro.getAngle()),
@@ -247,7 +245,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the robot's heading in degrees, from -180 to 180
    */
 
-   //NOT USED!!!
+   
   public double getHeading() {
     return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
   }
@@ -258,7 +256,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
 
-  //NOT USED!!!
+  
   public double getTurnRate() {
     return gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }

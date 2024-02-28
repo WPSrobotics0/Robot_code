@@ -32,13 +32,15 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+
+  AHRS gyro = new AHRS(SPI.Port.kMXP);
+
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    //gyro.calibr
     m_robotContainer = new RobotContainer();
-
+    Shuffleboard.getTab("Example tab").add(gyro);
   }
 
   /**
@@ -121,10 +123,5 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically whilst in simulation. */
   @Override
-  public void simulationPeriodic() {
-    int dev = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
-    SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(dev, "Yaw"));
-    angle.set(5.0);
-    //m_gyroSim.setAngle();
-  }
+  public void simulationPeriodic() {}
 }
