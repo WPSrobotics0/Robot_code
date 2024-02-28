@@ -35,15 +35,18 @@ public class bCommand extends Command {
   public double button(double speedModifier, int mod){
     
       if (mod==0){
-        speedModifier=0.5;
+        speedModifier=0.3;
       }
       else if (mod==1){
-        speedModifier=0.665;
+        speedModifier=0.475;
       }
       else if (mod==2){
-        speedModifier=0.83;
+        speedModifier=0.65;
       }
-      else{
+      else if (mod==3){
+        speedModifier=.815;
+      }
+      else if (mod==4){
         speedModifier=1.0;
       }
     return speedModifier;
