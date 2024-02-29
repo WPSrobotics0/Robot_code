@@ -57,7 +57,7 @@ public class ClimbSubsystem extends SubsystemBase {
     smartDashboardUpdate();
   }
 
-  public void (double speed) {
+  public void setExtendSpeed(double speed) {
     m_climbMotor1.set(speed);
   }
 
