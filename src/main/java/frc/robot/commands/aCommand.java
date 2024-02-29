@@ -12,6 +12,7 @@ import frc.robot.Constants;
 
 public class aCommand extends Command {
   /** Creates a new ShootNote. */
+  private int ticks;
   private DriveSubsystem m_robodrive;
   public aCommand(DriveSubsystem robodrive) {
     addRequirements(robodrive);
@@ -22,6 +23,7 @@ public class aCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    ticks=0;
     m_robodrive.driveMode=incrementSpeed(m_robodrive.driveMode);
     m_robodrive.speedModifier=button(m_robodrive.speedModifier, m_robodrive.driveMode);
 
@@ -30,7 +32,12 @@ public class aCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override 
   public void execute() {
-    
+    ticks++;
+    if (ticks%10==0){
+      m_robodrive.driveMode=incrementSpeed(m_robodrive.driveMode);
+      m_robodrive.speedModifier=button(m_robodrive.speedModifier, m_robodrive.driveMode);
+    }
+
   }
   public double button(double speedModifier, int mod){
     
