@@ -22,7 +22,7 @@ public class ShootNoteCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    getLeftTriggerAxis=RobotContainer.m_armController.getLeftTriggerAxis(); 
+    getLeftTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
     m_shooter.setShooterSpeed(-getLeftTriggerAxis);
     ticks = 0;
   }
@@ -30,7 +30,7 @@ public class ShootNoteCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    getLeftTriggerAxis=RobotContainer.m_armController.getLeftTriggerAxis(); 
+    getLeftTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
     ticks +=1;
     if (ticks == 25) {
       m_shooter.setFeederSpeed(-getLeftTriggerAxis);
