@@ -13,6 +13,7 @@ public class ShootNoteCommand extends Command {
   private int ticks;
   private int threshold;
   double getLeftTriggerAxis;
+  int convleftTriggerAxis;
   /** Creates a new ShootNote. */
   public ShootNoteCommand(ShooterSubsystem shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,6 +36,8 @@ public class ShootNoteCommand extends Command {
   public void execute() {
     getLeftTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
     ticks +=1;
+    convleftTriggerAxis=(int) getLeftTriggerAxis*100;
+    //threshold=convleftTriggerAxis/4;
     if (ticks == threshold) {
       //m_shooter.setFeederSpeed(-getLeftTriggerAxis);
       m_shooter.setFeederSpeed(-1);
