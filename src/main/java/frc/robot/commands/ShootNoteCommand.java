@@ -11,6 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShootNoteCommand extends Command {
   private ShooterSubsystem m_shooter;
   private int ticks;
+  private int threshold;
   double getLeftTriggerAxis;
   /** Creates a new ShootNote. */
   public ShootNoteCommand(ShooterSubsystem shooter) {
@@ -26,6 +27,7 @@ public class ShootNoteCommand extends Command {
     //m_shooter.setShooterSpeed(-getLeftTriggerAxis);
     m_shooter.setShooterSpeed(-1);
     ticks = 0;
+    threshold=25;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,7 +35,7 @@ public class ShootNoteCommand extends Command {
   public void execute() {
     getLeftTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
     ticks +=1;
-    if (ticks == 25) {
+    if (ticks == threshold) {
       //m_shooter.setFeederSpeed(-getLeftTriggerAxis);
       m_shooter.setFeederSpeed(-1);
     }
