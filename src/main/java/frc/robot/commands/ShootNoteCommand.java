@@ -11,7 +11,9 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShootNoteCommand extends Command {
   private ShooterSubsystem m_shooter;
   private int ticks;
-  double getLeftTriggerAxis;
+  private int threshold;
+  double getRightTriggerAxis;
+  int convRightTriggerAxis;
   /** Creates a new ShootNote. */
   public ShootNoteCommand(ShooterSubsystem shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,20 +24,28 @@ public class ShootNoteCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    getLeftTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
-    //m_shooter.setShooterSpeed(-getLeftTriggerAxis);
-    m_shooter.setShooterSpeed(-1);
+    //getRightTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
+    //m_shooter.setShooterSpeed(-1);
+    m_shooter.setShooterSpeed(-1*m_shooter.shootSpeed);
     ticks = 0;
+    threshold=25;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    getLeftTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
+    //getRightTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
     ticks +=1;
-    if (ticks == 25) {
-      //m_shooter.setFeederSpeed(-getLeftTriggerAxis);
-      m_shooter.setFeederSpeed(-1);
+    /*
+    if ((getRightTriggerAxis*100)%4==0){
+      convRightTriggerAxis=(int) getRightTriggerAxis*100;
+      threshold=convRightTriggerAxis/4;
+    }
+     */
+    
+    if (ticks == threshold) {
+      //m_shooter.setFeederSpeed(-1*getRightTriggerAxis);
+      m_shooter.setFeederSpeed(-1*m_shooter.shootSpeed);
     }
   }
   

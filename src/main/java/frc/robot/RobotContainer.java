@@ -22,6 +22,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.aCommand;
+import frc.robot.commands.bCommand;
+import frc.robot.commands.asCommand;
+import frc.robot.commands.bsCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -40,7 +43,9 @@ public class RobotContainer {
   private final ClimbExtendCommand m_ClimbExtendCommand = new ClimbExtendCommand(m_ClimbSubsystem);
   private final ClimbRetractCommand m_ClimbRetractCommand = new ClimbRetractCommand(m_ClimbSubsystem);
   private final aCommand m_ACommand=new aCommand(m_robotDrive);
-  private final aCommand m_BCommand=new aCommand(m_robotDrive);
+  private final bCommand m_BCommand=new bCommand(m_robotDrive);
+  private final asCommand m_ASCommand=new asCommand(m_ShooterSubsystem);
+  private final bsCommand m_BSCommand=new bsCommand(m_ShooterSubsystem);
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -66,7 +71,7 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband),
                 MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
-                true, true),
+                true, false),
             m_robotDrive));
   }
 
@@ -89,9 +94,12 @@ public class RobotContainer {
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     
-    m_armController.rightTrigger(0.05).whileTrue(m_ShootNoteCommand);
-    m_armController.leftTrigger(0.05).whileTrue(m_IntakeNoteCommand);
+    m_armController.rightTrigger(0.15).whileTrue(m_ShootNoteCommand);
+    m_armController.leftTrigger(0.15).whileTrue(m_IntakeNoteCommand);
     
+    m_armController.a().whileTrue(m_ASCommand);
+    m_armController.b().whileTrue(m_BSCommand);
+
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
     m_driverController.a().whileTrue(m_ACommand);
