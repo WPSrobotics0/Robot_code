@@ -77,7 +77,7 @@ public class ClimbSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Climb D", kClimbD);
       SmartDashboard.putNumber("Climb FF", kClimbFF);
   }
-
+  
   private void smartDashboardUpdate()
   {
       // SmartDashboard.putNumber("Climb Position", m_climbEncoder.getPosition());
