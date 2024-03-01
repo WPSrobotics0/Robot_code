@@ -89,8 +89,8 @@ public class RobotContainer {
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     
-    m_armController.rightTrigger(0.05).whileTrue(m_ShootNoteCommand);
-    m_armController.leftTrigger(0.05).whileTrue(m_IntakeNoteCommand);
+    m_armController.rightTrigger(0.15).whileTrue(m_ShootNoteCommand);
+    m_armController.leftTrigger(0.15).whileTrue(m_IntakeNoteCommand);
     
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
