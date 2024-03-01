@@ -25,8 +25,8 @@ public class ShootNoteCommand extends Command {
   @Override
   public void initialize() {
     //getRightTriggerAxis=RobotContainer.m_armController.getRightTriggerAxis(); 
-    m_shooter.setShooterSpeed(-1);
     //m_shooter.setShooterSpeed(-1);
+    m_shooter.setShooterSpeed(-1*m_shooter.shootSpeed);
     ticks = 0;
     threshold=25;
   }
@@ -45,7 +45,7 @@ public class ShootNoteCommand extends Command {
     
     if (ticks == threshold) {
       //m_shooter.setFeederSpeed(-1*getRightTriggerAxis);
-      m_shooter.setFeederSpeed(-1);
+      m_shooter.setFeederSpeed(-1*m_shooter.shootSpeed);
     }
   }
   
