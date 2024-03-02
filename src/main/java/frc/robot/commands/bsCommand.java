@@ -38,6 +38,8 @@ public class bsCommand extends Command {
     if (ticks%10==0){
       m_robodshooter.shootMode=decrementSpeed(m_robodshooter.shootMode);
       m_robodshooter.shootSpeed=button(m_robodshooter.shootSpeed, m_robodshooter.shootMode);
+      SmartDashboard.putBoolean("bspressed", true);
+
     }
   }
   public double button(double speedModifier, int mod){
@@ -66,12 +68,14 @@ public class bsCommand extends Command {
     else{
       return speedMode;
     }
+    
   }
   
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    SmartDashboard.putBoolean("bspressed", false);
+
   }
 
   // Returns true when the command should end.

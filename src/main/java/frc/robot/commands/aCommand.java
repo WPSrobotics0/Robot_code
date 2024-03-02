@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
@@ -26,6 +26,7 @@ public class aCommand extends Command {
     ticks=0;
     m_robodrive.driveMode=incrementSpeed(m_robodrive.driveMode);
     m_robodrive.speedModifier=button(m_robodrive.speedModifier, m_robodrive.driveMode);
+    SmartDashboard.putBoolean("apressed", true);
 
   }
 
@@ -70,6 +71,7 @@ public class aCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("apressed", false);
     
   }
 
