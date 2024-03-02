@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ClimbSubsystem;
 
@@ -22,6 +23,8 @@ public class ClimbRetractCommand extends Command {
   @Override
   public void initialize() {
     m_climb.setRetractSpeed(0.15+.1);
+    SmartDashboard.putBoolean("climbRetracton", true);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,6 +37,8 @@ public class ClimbRetractCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     m_climb.setRetractSpeed(0);
+    SmartDashboard.putBoolean("climbRetracton", false);
+
   }
 
   // Returns true when the command should end.
