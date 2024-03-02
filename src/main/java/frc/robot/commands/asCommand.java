@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ShooterSubsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
@@ -26,6 +26,7 @@ public class asCommand extends Command {
     ticks=0;
     m_robodshooter.shootMode=incrementSpeed(m_robodshooter.shootMode);
     m_robodshooter.shootSpeed=button(m_robodshooter.shootSpeed, m_robodshooter.shootMode);
+    SmartDashboard.putBoolean("ason", true);
 
   }
 
@@ -37,7 +38,7 @@ public class asCommand extends Command {
       m_robodshooter.shootMode=incrementSpeed(m_robodshooter.shootMode);
       m_robodshooter.shootSpeed=button(m_robodshooter.shootSpeed, m_robodshooter.shootMode);
     }
-
+    
   }
   public double button(double speedModifier, int mod){
     
@@ -51,7 +52,7 @@ public class asCommand extends Command {
       speedModifier=0.65;
     }
     else if (mod==3){
-      speedModifier=.815;
+      speedModifier=0.815;
     }
     else if (mod==4){
       speedModifier=1.0;
@@ -59,7 +60,7 @@ public class asCommand extends Command {
     return speedModifier;
   }
   public int incrementSpeed(int speedMode){
-    if (speedMode!=4){
+    if (speedMode!=5){
       return speedMode++;
     }
     else{
@@ -70,7 +71,8 @@ public class asCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    SmartDashboard.putBoolean("ason", false);
+
   }
 
   // Returns true when the command should end.

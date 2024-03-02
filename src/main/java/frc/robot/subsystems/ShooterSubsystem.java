@@ -28,7 +28,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private final CANSparkMax m_leftFeeder = new CANSparkMax(SubsystemConstants.kLeftFeederCanId, MotorType.kBrushed);
   private final CANSparkMax m_rightShooter = new CANSparkMax(SubsystemConstants.kRightShooterCanId, MotorType.kBrushed);
   private final CANSparkMax m_rightFeeder = new CANSparkMax(SubsystemConstants.kRightFeederCanId, MotorType.kBrushed);
-  public int shootMode=0;
+  public int shootMode=3;
   public double shootSpeed=1.0;
 
   /** Creates a new ShooterSubsystem. */

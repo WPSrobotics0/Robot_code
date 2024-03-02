@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
@@ -26,6 +27,7 @@ public class bsCommand extends Command {
     ticks=0;
     m_robodshooter.shootMode=decrementSpeed(m_robodshooter.shootMode);
     m_robodshooter.shootSpeed=button(m_robodshooter.shootSpeed, m_robodshooter.shootMode);
+    SmartDashboard.putBoolean("on", true);
 
   }
 
