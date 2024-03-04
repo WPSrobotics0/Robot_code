@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.SubsystemConstants;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbRetractCommand;
 //import frc.robot.commands.Autos;
@@ -15,6 +16,10 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -53,6 +58,11 @@ public class RobotContainer {
   private final bCommand m_BCommand = new bCommand(m_robotDrive);
   private final asCommand m_ASCommand = new asCommand(m_ShooterSubsystem);
   private final bsCommand m_BSCommand = new bsCommand(m_ShooterSubsystem);
+    private final CANSparkMax m_leftShooter = new CANSparkMax(SubsystemConstants.kLeftShooterCanId, MotorType.kBrushed);
+  private final CANSparkMax m_leftFeeder = new CANSparkMax(SubsystemConstants.kLeftFeederCanId, MotorType.kBrushed);
+  private final CANSparkMax m_rightShooter = new CANSparkMax(SubsystemConstants.kRightShooterCanId, MotorType.kBrushed);
+  private final CANSparkMax m_rightFeeder = new CANSparkMax(SubsystemConstants.kRightFeederCanId, MotorType.kBrushed);
+
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
@@ -124,12 +134,14 @@ public class RobotContainer {
     // m_driverController.a().whileTrue(m_ACommand);
     // m_driverController.b().whileTrue(m_BCommand);
 
-    // chooser = new SendableChooser<Command>();
-    // chooser.addOption("Time", time());
-    // SmartDashboard.putData(chooser);
+     chooser = new SendableChooser<Command>();
+     chooser.addOption("Time", time());
+     SmartDashboard.putData(chooser);
+     chooser.addOption("Time2", time2());
+     SmartDashboard.putData(chooser);
   }
 
-  // SendableChooser<Command> chooser;
+   SendableChooser<Command> chooser;
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -138,14 +150,14 @@ public class RobotContainer {
    */
 
   public Command getAutonomousCommand() {
-    // Command selected = chooser.getSelected();
-    // if (selected != null) {
-    //   return selected;
-    // } else {
-    //   return time();
-    // }
+    Command selected = chooser.getSelected();
+    if (selected != null) {
+       return selected;
+     } else {
+       return time();
+     }
 
-    return time();
+    //return time();
   }
 
   public Command time() {
@@ -160,9 +172,18 @@ public class RobotContainer {
     public Command time2() {
     // An example command will be run in autonomous
     return new StartEndCommand(() -> {
-      m_robotDrive.drive(0.25, 0, 0, false, false);
+      m_leftShooter.set(1);
+      m_leftFeeder.set(1);
+      m_rightShooter.follow(m_leftShooter,true);
+      m_rightFeeder.follow(m_leftFeeder,true);
+      
     }, () -> {
-      m_robotDrive.drive(0, 0, 0, false, false);
-    }, m_robotDrive).withTimeout(5).andThen( );
+      m_leftShooter.set(0);
+      m_leftFeeder.set(0);
+      m_rightShooter.follow(m_leftShooter,true);
+      m_rightFeeder.follow(m_leftFeeder,true);
+    }, m_robotDrive).withTimeout(5).andThen(()->{
+      m_robotDrive.drive(-0.25, 0, 0, false, false);
+    }).withTimeout(5).andThen(()->{m_robotDrive.drive(0, 0, 0, false, false);});
   }
 }
