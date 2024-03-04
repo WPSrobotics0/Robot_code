@@ -151,13 +151,13 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     Command selected = chooser.getSelected();
-    if (selected != null) {
+    /*if (selected != null) {
        return selected;
      } else {
        return time();
      }
-
-    //return time();
+*/
+    return time();
   }
 
   public Command time() {
@@ -173,17 +173,17 @@ public class RobotContainer {
     // An example command will be run in autonomous
     return new StartEndCommand(() -> {
       m_leftShooter.set(1);
-      m_leftFeeder.set(1);
+      m_leftFeeder.set(0);
       m_rightShooter.follow(m_leftShooter,true);
       m_rightFeeder.follow(m_leftFeeder,true);
       
     }, () -> {
-      m_leftShooter.set(0);
-      m_leftFeeder.set(0);
+      
+      m_leftFeeder.set(1);
       m_rightShooter.follow(m_leftShooter,true);
       m_rightFeeder.follow(m_leftFeeder,true);
-    }, m_robotDrive).withTimeout(5).andThen(()->{
+    }).withTimeout(1).andThen(()->{
       m_robotDrive.drive(-0.25, 0, 0, false, false);
-    }).withTimeout(5).andThen(()->{m_robotDrive.drive(0, 0, 0, false, false);});
+    }, m_robotDrive).withTimeout(5).andThen(()->{m_robotDrive.drive(0, 0, 0, false, false);},m_robotDrive);
   }
 }
