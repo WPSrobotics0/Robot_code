@@ -17,8 +17,12 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.event.EventLoop;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.aCommand;
@@ -75,9 +79,10 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband),
                 MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
-                true, false),
+                fieldRelative, false),
             m_robotDrive));
   }
+  boolean fieldRelative = true;
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
@@ -105,27 +110,59 @@ public class RobotContainer {
 
     m_armController.rightTrigger(0.15).whileTrue(m_ShootNoteCommand);
     m_armController.leftTrigger(0.15).whileTrue(m_IntakeNoteCommand);
+    
+    m_driverController.y().onTrue(new InstantCommand(()->fieldRelative = false));
+    m_driverController.x().onTrue(new InstantCommand(()->fieldRelative = true));
 
+    //m_driverController.start().onTrue(new InstantCommand(()->m_robotDrive.zeroHeading()));
     // m_armController.a().whileTrue(m_ASCommand);
     // m_armController.b().whileTrue(m_BSCommand);
 
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
-    
+
     // m_driverController.a().whileTrue(m_ACommand);
     // m_driverController.b().whileTrue(m_BCommand);
 
+    // chooser = new SendableChooser<Command>();
+    // chooser.addOption("Time", time());
+    // SmartDashboard.putData(chooser);
   }
+
+  // SendableChooser<Command> chooser;
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  /*
-   * public Command getAutonomousCommand() {
-   * // An example command will be run in autonomous
-   * return Autos.exampleAuto(m_exampleSubsystem);
-   * }
-   */
+
+  public Command getAutonomousCommand() {
+    // Command selected = chooser.getSelected();
+    // if (selected != null) {
+    //   return selected;
+    // } else {
+    //   return time();
+    // }
+
+    return time();
+  }
+
+  public Command time() {
+    // An example command will be run in autonomous
+    return new StartEndCommand(() -> {
+      m_robotDrive.drive(0.25, 0, 0, false, false);
+    }, () -> {
+      m_robotDrive.drive(0, 0, 0, false, false);
+    }, m_robotDrive).withTimeout(5);
+  }
+
+    public Command time2() {
+    // An example command will be run in autonomous
+    return new StartEndCommand(() -> {
+      m_robotDrive.drive(0.25, 0, 0, false, false);
+    }, () -> {
+      m_robotDrive.drive(0, 0, 0, false, false);
+    }, m_robotDrive).withTimeout(5).andThen( );
+  }
 }
