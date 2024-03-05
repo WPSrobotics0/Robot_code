@@ -62,7 +62,7 @@ public class RobotContainer {
   private final CANSparkMax m_leftFeeder = new CANSparkMax(SubsystemConstants.kLeftFeederCanId, MotorType.kBrushed);
   private final CANSparkMax m_rightShooter = new CANSparkMax(SubsystemConstants.kRightShooterCanId, MotorType.kBrushed);
   private final CANSparkMax m_rightFeeder = new CANSparkMax(SubsystemConstants.kRightFeederCanId, MotorType.kBrushed);
-
+  private int ticks;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
@@ -139,6 +139,7 @@ public class RobotContainer {
      SmartDashboard.putData(chooser);
      chooser.addOption("Time2", time2());
      SmartDashboard.putData(chooser);
+     ticks=0;
   }
 
    SendableChooser<Command> chooser;
@@ -151,13 +152,13 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     Command selected = chooser.getSelected();
-    /*if (selected != null) {
+    if (selected != null) {
        return selected;
      } else {
        return time();
      }
-*/
-    return time();
+
+    //return time();
   }
 
   public Command time() {
@@ -168,9 +169,29 @@ public class RobotContainer {
       m_robotDrive.drive(0, 0, 0, false, false);
     }, m_robotDrive).withTimeout(5);
   }
-
-    public Command time2() {
+public Command time2() {
     // An example command will be run in autonomous
+    if (ticks<50) {
+      ticks++;
+      return backwards(1);
+    }
+    else if (ticks<110){
+      ticks++;
+      return shoot();
+    }
+    else if (ticks<111){
+      ticks++;
+      return stopshoot();
+    }
+    else{
+      return backwards(5);
+    }
+    
+    
+  }
+    public Command shoot() {
+    // An example command will be run in autonomous
+
     return new StartEndCommand(() -> {
       m_leftShooter.set(1);
       m_leftFeeder.set(0);
@@ -182,8 +203,29 @@ public class RobotContainer {
       m_leftFeeder.set(1);
       m_rightShooter.follow(m_leftShooter,true);
       m_rightFeeder.follow(m_leftFeeder,true);
-    }).withTimeout(1).andThen(()->{
+    }).withTimeout(1);
+  }
+  public Command stopshoot() {
+    // An example command will be run in autonomous
+
+    return new StartEndCommand(() -> {
+      m_leftShooter.set(0);
+      m_leftFeeder.set(0);
+      m_rightShooter.follow(m_leftShooter,true);
+      m_rightFeeder.follow(m_leftFeeder,true);
+      
+    }, () -> {
+      
+      m_leftFeeder.set(0);
+      m_rightShooter.follow(m_leftShooter,true);
+      m_rightFeeder.follow(m_leftFeeder,true);
+    }).withTimeout(1);
+  }
+    public Command backwards(int duration) {
+    return new StartEndCommand(() -> {
       m_robotDrive.drive(-0.25, 0, 0, false, false);
-    }, m_robotDrive).withTimeout(5).andThen(()->{m_robotDrive.drive(0, 0, 0, false, false);},m_robotDrive);
+    }, () -> {
+      m_robotDrive.drive(0, 0, 0, false, false);
+    }, m_robotDrive).withTimeout(duration);
   }
 }
