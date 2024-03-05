@@ -164,9 +164,9 @@ public class RobotContainer {
   public Command time() {
     // An example command will be run in autonomous
     return new StartEndCommand(() -> {
-      m_robotDrive.drive(0.25, 0, 0, false, false);
+      m_robotDrive.drive(0.25, 0, 0, fieldRelative, false);
     }, () -> {
-      m_robotDrive.drive(0, 0, 0, false, false);
+      m_robotDrive.drive(0, 0, 0, fieldRelative, false);
     }, m_robotDrive).withTimeout(5);
   }
 public Command time2() {
@@ -223,9 +223,9 @@ public Command time2() {
   }
     public Command backwards(int duration) {
     return new StartEndCommand(() -> {
-      m_robotDrive.drive(-0.25, 0, 0, false, false);
+      m_robotDrive.drive(-0.25, 0, 0, fieldRelative, false);
     }, () -> {
-      m_robotDrive.drive(0, 0, 0, false, false);
+      m_robotDrive.drive(0, 0, 0, fieldRelative, false);
     }, m_robotDrive).withTimeout(duration);
   }
 }
