@@ -173,6 +173,7 @@ public class RobotContainer {
   }
 public Command time2() {
     // An example command will be run in autonomous
+    /*
     ticks++;
     if (ticks<second) {
       
@@ -195,7 +196,20 @@ public Command time2() {
     else{
       return move(1,-1,0);
     }
-    
+    */
+    return new StartEndCommand(() -> {
+      move(1,-1,0);
+    }, () -> {
+      shoot().withTimeout(second*5);
+    }).andThen(() -> {
+      stopshoot();
+    }).andThen(() -> {
+      move(2,-1,0);
+    }).andThen(() -> {
+      move(10,0,-1);
+    }).andThen(() -> {
+      move(1,-1,0);
+    });
     
   }
     public Command shoot() {
