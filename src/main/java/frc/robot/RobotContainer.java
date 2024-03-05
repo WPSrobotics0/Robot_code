@@ -63,7 +63,8 @@ public class RobotContainer {
   private final CANSparkMax m_rightShooter = new CANSparkMax(SubsystemConstants.kRightShooterCanId, MotorType.kBrushed);
   private final CANSparkMax m_rightFeeder = new CANSparkMax(SubsystemConstants.kRightFeederCanId, MotorType.kBrushed);
   private int ticks;
-
+  private int second;
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
   // new CommandXboxController(OIConstants.kDriverControllerPort);
@@ -140,6 +141,7 @@ public class RobotContainer {
      chooser.addOption("Time2", time2());
      SmartDashboard.putData(chooser);
      ticks=0;
+     second = 50;
   }
 
    SendableChooser<Command> chooser;
@@ -171,20 +173,27 @@ public class RobotContainer {
   }
 public Command time2() {
     // An example command will be run in autonomous
-    if (ticks<50) {
-      ticks++;
-      return backwards(1);
+    ticks++;
+    if (ticks<second) {
+      
+      return move(1,-1,0);
     }
-    else if (ticks<110){
-      ticks++;
+    else if (ticks<2*second) {
+      
       return shoot();
     }
-    else if (ticks<111){
-      ticks++;
+    else if (ticks<=2*second){
+      
       return stopshoot();
     }
+    else if (ticks<4*second) {
+      return move(2,-1,0);
+    }
+    else if (ticks<14*second) {
+      return move(10,0,-1);
+    }
     else{
-      return backwards(5);
+      return move(1,-1,0);
     }
     
     
@@ -220,6 +229,15 @@ public Command time2() {
       m_rightShooter.follow(m_leftShooter,true);
       m_rightFeeder.follow(m_leftFeeder,true);
     }).withTimeout(1);
+  }
+    public Command move(int duration,int xdir,int ydir) {
+      //for x/ydir 0 ==no movement -1 == backward/right 1 == forward/left
+      return new StartEndCommand(() -> {
+        
+        m_robotDrive.drive(xdir*0.25, ydir*0.25, 0, false, false);
+      }, () -> {
+      m_robotDrive.drive(0, 0, 0, false, false);
+    }, m_robotDrive).withTimeout(duration);
   }
     public Command backwards(int duration) {
     return new StartEndCommand(() -> {
