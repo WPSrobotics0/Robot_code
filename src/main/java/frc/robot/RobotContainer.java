@@ -122,8 +122,8 @@ public class RobotContainer {
     m_driverController.y().onTrue(new InstantCommand(() -> fieldRelative = false));
     m_driverController.x().onTrue(new InstantCommand(() -> fieldRelative = true));
 
-    // m_driverController.start().onTrue(new
-    // InstantCommand(()->m_robotDrive.zeroHeading()));
+    m_driverController.start().onTrue(new
+      InstantCommand(()->m_robotDrive.zeroHeading()));
     // m_armController.a().whileTrue(m_ASCommand);
     // m_armController.b().whileTrue(m_BSCommand);
 
@@ -211,8 +211,7 @@ public class RobotContainer {
 
   public Command shoot() {
     // An example command will be run in autonomous
-
-    return m_ShootNoteCommand.withTimeout(1.5);
+    return new ShootNoteCommand(m_ShooterSubsystem).withTimeout(1.5);
   }
   public Command stopshoot() {
     // An example command will be run in autonomous
