@@ -137,8 +137,9 @@ public class RobotContainer {
 
      chooser = new SendableChooser<Command>();
      chooser.addOption("Time", justMove());
-     //SmartDashboard.putData(chooser);
+     SmartDashboard.putData(chooser);
      chooser.addOption("moveThenShoot", moveShootMove());
+     SmartDashboard.putData(chooser);
      chooser.addOption("moveThenShoot", moveThenShoot());
      SmartDashboard.putData(chooser);
      ticks=0;
@@ -199,24 +200,24 @@ public Command moveShootMove() {
     }
     */
     return new StartEndCommand(() -> {
-      moveSpeedTime(1,-1,0);
+      moveTimeSpeed(1,-1,0);
     }, () -> {
       shoot().withTimeout(second*5);
     }).andThen(() -> {
       stopshoot();
     }).andThen(() -> {
-      moveSpeedTime(2,-1,0);
+      moveTimeSpeed(2,-1,0);
     }).andThen(() -> {
-      moveSpeedTime(10,0,-1);
+      moveTimeSpeed(10,0,-1);
     }).andThen(() -> {
-      moveSpeedTime(1,-1,0);
+      moveTimeSpeed(1,-1,0);
     });
     
   }
   public Command moveThenShoot() {
     
     return new StartEndCommand(() -> {
-      moveSpeedTime(1,-1,0);
+      moveTimeSpeed(1,-1,0);
     }, () -> {
       shoot().withTimeout(second*5);
     }).andThen(() -> {
@@ -256,7 +257,7 @@ public Command moveShootMove() {
       m_rightFeeder.follow(m_leftFeeder,true);
     }).withTimeout(1);
   }
-    public Command moveSpeedTime(int duration,int xdir,int ydir) {
+    public Command moveTimeSpeed(int duration,int xdir,int ydir) {
       //for x/ydir 0 ==no movement -1 == backward/right 1 == forward/left
       return new StartEndCommand(() -> {
         
