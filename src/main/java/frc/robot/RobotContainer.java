@@ -136,9 +136,10 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_BCommand);
 
      chooser = new SendableChooser<Command>();
-     chooser.addOption("Time", time());
-     SmartDashboard.putData(chooser);
-     chooser.addOption("Time2", time2());
+     chooser.addOption("Time", justMove());
+     //SmartDashboard.putData(chooser);
+     chooser.addOption("moveThenShoot", moveShootMove());
+     chooser.addOption("moveThenShoot", moveThenShoot());
      SmartDashboard.putData(chooser);
      ticks=0;
      second = 50;
@@ -157,21 +158,21 @@ public class RobotContainer {
     if (selected != null) {
        return selected;
      } else {
-       return time();
+       return justMove();
      }
 
     //return time();
   }
 
-  public Command time() {
+  public Command justMove() {
     // An example command will be run in autonomous
     return new StartEndCommand(() -> {
-      m_robotDrive.drive(0.25, 0, 0, false, false);
+      m_robotDrive.drive(-0.25, 0, 0, false, false);
     }, () -> {
       m_robotDrive.drive(0, 0, 0, false, false);
     }, m_robotDrive).withTimeout(5);
   }
-public Command time2() {
+public Command moveShootMove() {
     // An example command will be run in autonomous
     /*
     ticks++;
@@ -198,17 +199,28 @@ public Command time2() {
     }
     */
     return new StartEndCommand(() -> {
-      move(1,-1,0);
+      moveSpeedTime(1,-1,0);
     }, () -> {
       shoot().withTimeout(second*5);
     }).andThen(() -> {
       stopshoot();
     }).andThen(() -> {
-      move(2,-1,0);
+      moveSpeedTime(2,-1,0);
     }).andThen(() -> {
-      move(10,0,-1);
+      moveSpeedTime(10,0,-1);
     }).andThen(() -> {
-      move(1,-1,0);
+      moveSpeedTime(1,-1,0);
+    });
+    
+  }
+  public Command moveThenShoot() {
+    
+    return new StartEndCommand(() -> {
+      moveSpeedTime(1,-1,0);
+    }, () -> {
+      shoot().withTimeout(second*5);
+    }).andThen(() -> {
+      stopshoot();
     });
     
   }
@@ -244,7 +256,7 @@ public Command time2() {
       m_rightFeeder.follow(m_leftFeeder,true);
     }).withTimeout(1);
   }
-    public Command move(int duration,int xdir,int ydir) {
+    public Command moveSpeedTime(int duration,int xdir,int ydir) {
       //for x/ydir 0 ==no movement -1 == backward/right 1 == forward/left
       return new StartEndCommand(() -> {
         
