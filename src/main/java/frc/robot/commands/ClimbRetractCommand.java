@@ -22,7 +22,7 @@ public class ClimbRetractCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climb.setRetractSpeed(0.15+.1);
+    m_climb.setRetractSpeed(.5);
     SmartDashboard.putBoolean("climbRetracton", true);
 
   }
@@ -30,7 +30,7 @@ public class ClimbRetractCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climb.setRetractSpeed(0.15+.1);
+    m_climb.setRetractSpeed(.25);
   }
 
   // Called once the command ends or is interrupted.

@@ -58,13 +58,9 @@ public class RobotContainer {
   private final bCommand m_BCommand = new bCommand(m_robotDrive);
   private final asCommand m_ASCommand = new asCommand(m_ShooterSubsystem);
   private final bsCommand m_BSCommand = new bsCommand(m_ShooterSubsystem);
-    private final CANSparkMax m_leftShooter = new CANSparkMax(SubsystemConstants.kLeftShooterCanId, MotorType.kBrushed);
-  private final CANSparkMax m_leftFeeder = new CANSparkMax(SubsystemConstants.kLeftFeederCanId, MotorType.kBrushed);
-  private final CANSparkMax m_rightShooter = new CANSparkMax(SubsystemConstants.kRightShooterCanId, MotorType.kBrushed);
-  private final CANSparkMax m_rightFeeder = new CANSparkMax(SubsystemConstants.kRightFeederCanId, MotorType.kBrushed);
   private int ticks;
   private int second;
-  
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   // private final CommandXboxController m_driverController =
   // new CommandXboxController(OIConstants.kDriverControllerPort);
@@ -93,6 +89,7 @@ public class RobotContainer {
                 fieldRelative, false),
             m_robotDrive));
   }
+
   boolean fieldRelative = true;
 
   /**
@@ -121,11 +118,12 @@ public class RobotContainer {
 
     m_armController.rightTrigger(0.15).whileTrue(m_ShootNoteCommand);
     m_armController.leftTrigger(0.15).whileTrue(m_IntakeNoteCommand);
-    
-    m_driverController.y().onTrue(new InstantCommand(()->fieldRelative = false));
-    m_driverController.x().onTrue(new InstantCommand(()->fieldRelative = true));
 
-    //m_driverController.start().onTrue(new InstantCommand(()->m_robotDrive.zeroHeading()));
+    m_driverController.y().onTrue(new InstantCommand(() -> fieldRelative = false));
+    m_driverController.x().onTrue(new InstantCommand(() -> fieldRelative = true));
+
+    // m_driverController.start().onTrue(new
+    // InstantCommand(()->m_robotDrive.zeroHeading()));
     // m_armController.a().whileTrue(m_ASCommand);
     // m_armController.b().whileTrue(m_BSCommand);
 
@@ -135,16 +133,16 @@ public class RobotContainer {
     // m_driverController.a().whileTrue(m_ACommand);
     // m_driverController.b().whileTrue(m_BCommand);
 
-     chooser = new SendableChooser<Command>();
-     chooser.addOption("Time", time());
-     SmartDashboard.putData(chooser);
-     chooser.addOption("Time2", time2());
-     SmartDashboard.putData(chooser);
-     ticks=0;
-     second = 50;
+    chooser = new SendableChooser<Command>();
+    chooser.addOption("Time", time());
+    SmartDashboard.putData(chooser);
+    chooser.addOption("Time2", time2());
+    SmartDashboard.putData(chooser);
+    ticks = 0;
+    second = 50;
   }
 
-   SendableChooser<Command> chooser;
+  SendableChooser<Command> chooser;
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -155,12 +153,12 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     Command selected = chooser.getSelected();
     if (selected != null) {
-       return selected;
-     } else {
-       return time();
-     }
+      return selected;
+    } else {
+      return time();
+    }
 
-    //return time();
+    // return time();
   }
 
   public Command time() {
@@ -171,89 +169,76 @@ public class RobotContainer {
       m_robotDrive.drive(0, 0, 0, fieldRelative, false);
     }, m_robotDrive).withTimeout(5);
   }
-public Command time2() {
-    // An example command will be run in autonomous
+
+  public Command time2() {
+    // Auton option 2 shoots and moves the robot
     /*
-    ticks++;
-    if (ticks<second) {
-      
-      return move(1,-1,0);
-    }
-    else if (ticks<2*second) {
-      
-      return shoot();
-    }
-    else if (ticks<=2*second){
-      
-      return stopshoot();
-    }
-    else if (ticks<4*second) {
-      return move(2,-1,0);
-    }
-    else if (ticks<14*second) {
-      return move(10,0,-1);
-    }
-    else{
-      return move(1,-1,0);
-    }
-    */
-    return new StartEndCommand(() -> {
-      move(1,-1,0);
-    }, () -> {
-      shoot().withTimeout(second*5);
-    }).andThen(() -> {
-      stopshoot();
-    }).andThen(() -> {
-      move(2,-1,0);
-    }).andThen(() -> {
-      move(10,0,-1);
-    }).andThen(() -> {
-      move(1,-1,0);
-    });
+     * ticks++;
+     * if (ticks<second) {
+     * 
+     * return move(1,-1,0);
+     * }
+     * else if (ticks<2*second) {
+     * 
+     * return shoot();
+     * }
+     * else if (ticks<=2*second){
+     * 
+     * return stopshoot();
+     * }
+     * else if (ticks<4*second) {
+     * return move(2,-1,0);
+     * }
+     * else if (ticks<14*second) {
+     * return move(10,0,-1);
+     * }
+     * else{
+     * return move(1,-1,0);
+     * }
+     */
     
+    return move(1,-1,0)
+    .andThen(shoot())
+     .andThen(
+      move(2, -1, 0)
+    ).andThen(
+      move(1, 0, -1)
+    ).andThen(
+      move(1, -1, 0)
+    );
+
   }
-    public Command shoot() {
+
+  public Command shoot() {
     // An example command will be run in autonomous
 
-    return new StartEndCommand(() -> {
-      m_leftShooter.set(1);
-      m_leftFeeder.set(0);
-      m_rightShooter.follow(m_leftShooter,true);
-      m_rightFeeder.follow(m_leftFeeder,true);
-      
-    }, () -> {
-      
-      m_leftFeeder.set(1);
-      m_rightShooter.follow(m_leftShooter,true);
-      m_rightFeeder.follow(m_leftFeeder,true);
-    }).withTimeout(1);
+    return m_ShootNoteCommand.withTimeout(1.5);
   }
   public Command stopshoot() {
     // An example command will be run in autonomous
 
     return new StartEndCommand(() -> {
-      m_leftShooter.set(0);
-      m_leftFeeder.set(0);
-      m_rightShooter.follow(m_leftShooter,true);
-      m_rightFeeder.follow(m_leftFeeder,true);
-      
+
+      m_ShooterSubsystem.feed(0);
+      m_ShooterSubsystem.shoot(0);
     }, () -> {
-      
-      m_leftFeeder.set(0);
-      m_rightShooter.follow(m_leftShooter,true);
-      m_rightFeeder.follow(m_leftFeeder,true);
+
+      m_ShooterSubsystem.feed(0);
+      m_ShooterSubsystem.shoot(0);
     }).withTimeout(1);
   }
-    public Command move(int duration,int xdir,int ydir) {
-      //for x/ydir 0 ==no movement -1 == backward/right 1 == forward/left
-      return new StartEndCommand(() -> {
-        
-        m_robotDrive.drive(xdir*0.25, ydir*0.25, 0, false, false);
-      }, () -> {
+
+  public Command move(double duration, double xdir, double ydir) {
+    // for x/ydir 0 ==no movement -1 == backward/right 1 == forward/left
+    return new StartEndCommand(() -> {
+
+      m_robotDrive.drive(xdir * 0.25, ydir * 0.25, 0, false, false);
+    }, () -> {
       m_robotDrive.drive(0, 0, 0, false, false);
     }, m_robotDrive).withTimeout(duration);
   }
-    public Command backwards(int duration) {
+
+  public Command backwards(int duration) {
     return new StartEndCommand(() -> {
       m_robotDrive.drive(-0.25, 0, 0, fieldRelative, false);
     }, () -> {

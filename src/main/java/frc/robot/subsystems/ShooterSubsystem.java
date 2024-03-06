@@ -58,4 +58,13 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setFeederSpeed(double speed) {
     m_leftFeeder.set(speed);
   }
+
+  public void shoot(double speed) {
+    m_leftShooter.set(speed);
+    m_rightShooter.follow(m_leftShooter,true);
+  }
+  public void feed(double speed){
+    m_leftFeeder.set(speed);
+    m_rightFeeder.follow(m_leftShooter,true);
+  }
 }
