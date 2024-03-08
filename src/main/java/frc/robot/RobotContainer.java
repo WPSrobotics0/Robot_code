@@ -134,9 +134,11 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_BCommand);
 
     chooser = new SendableChooser<Command>();
-    chooser.addOption("Time", time());
+    chooser.addOption("Auton Forward", time());
     SmartDashboard.putData(chooser);
-    chooser.addOption("Time2", time2());
+    chooser.addOption("Auton shoot then off to the right", time2());
+    SmartDashboard.putData(chooser);
+    chooser.addOption("Auton shoot then backward", time3());
     SmartDashboard.putData(chooser);
     ticks = 0;
     second = 50;
@@ -172,43 +174,29 @@ public class RobotContainer {
 
   public Command time2() {
     // Auton option 2 shoots and moves the robot
-    /*
-     * ticks++;
-     * if (ticks<second) {
-     * 
-     * return move(1,-1,0);
-     * }
-     * else if (ticks<2*second) {
-     * 
-     * return shoot();
-     * }
-     * else if (ticks<=2*second){
-     * 
-     * return stopshoot();
-     * }
-     * else if (ticks<4*second) {
-     * return move(2,-1,0);
-     * }
-     * else if (ticks<14*second) {
-     * return move(10,0,-1);
-     * }
-     * else{
-     * return move(1,-1,0);
-     * }
-     */
     
-    return move(1,-1,0)
+    return move(.28,-1,0)
     .andThen(shoot())
      .andThen(
-      move(2, -1, 0)
+      move(.56, -1, 0)
     ).andThen(
-      move(1, 0, -1)
+      move(2.8, 0, -1)
     ).andThen(
-      move(1, -1, 0)
+      move(1.4, -1, 0)
     );
+
 
   }
 
+  public Command time3() {
+    // Auton option 3 shoots then moves back
+    
+    return shoot().andThen(
+      move(1.68, -1, 0)
+    );
+
+
+  }
   public Command shoot() {
     // An example command will be run in autonomous
     return new ShootNoteCommand(m_ShooterSubsystem).withTimeout(1.5);
