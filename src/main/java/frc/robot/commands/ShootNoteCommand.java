@@ -32,7 +32,7 @@ public class ShootNoteCommand extends Command {
     ticks = 0;
     threshold=25;
     SmartDashboard.putBoolean("outtakeon", true);
-
+    SmartDashboard.putNumber("num", m_shooter.shootSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
