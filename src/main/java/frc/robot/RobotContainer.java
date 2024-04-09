@@ -131,8 +131,6 @@ public class RobotContainer {
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
 
-    m_driverController.a().whileTrue(m_ShootNoteCommand);
-
     //might work (potentail problem child)
     if (m_armController.a() != null) {
       m_ShooterSubsystem.shootSpeed=0.5;
@@ -140,6 +138,10 @@ public class RobotContainer {
     else{
       m_ShooterSubsystem.shootSpeed=1;
     }
+
+    m_driverController.a().whileTrue(m_ShootNoteCommand);
+
+    
     // m_driverController.b().whileTrue(m_BCommand);
 
     chooser = new SendableChooser<Command>();
