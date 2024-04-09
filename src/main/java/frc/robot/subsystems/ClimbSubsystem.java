@@ -35,7 +35,7 @@ public class ClimbSubsystem extends SubsystemBase {
     m_climbMotor1.setIdleMode(IdleMode.kBrake);
     m_climbMotor2.setIdleMode(IdleMode.kBrake);
 
-    m_climbMotor2.follow(m_climbMotor1, true);
+    m_climbMotor2.follow(m_climbMotor1, false);
 
 
 
