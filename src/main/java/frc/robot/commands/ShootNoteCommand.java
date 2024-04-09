@@ -51,13 +51,7 @@ public class ShootNoteCommand extends Command {
       //m_shooter.setFeederSpeed(-1*getRightTriggerAxis);
       m_shooter.setFeederSpeed(-1*m_shooter.shootSpeed);
     }
-    //might work (potentail problem child)
-    if (RobotContainer.m_armController.a() != null) {
-      m_shooter.shootSpeed=0.5;
-    }
-    else{
-      m_shooter.shootSpeed=1;
-    }
+    
     SmartDashboard.putNumber("num", m_shooter.shootSpeed);
   }
   
