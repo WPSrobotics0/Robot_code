@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShootNoteCommand extends Command {
@@ -50,6 +51,14 @@ public class ShootNoteCommand extends Command {
       //m_shooter.setFeederSpeed(-1*getRightTriggerAxis);
       m_shooter.setFeederSpeed(-1*m_shooter.shootSpeed);
     }
+    //might work (potentail problem child)
+    if (RobotContainer.m_armController.a() != null) {
+      m_shooter.shootSpeed=0.5;
+    }
+    else{
+      m_shooter.shootSpeed=1;
+    }
+    SmartDashboard.putNumber("num", m_shooter.shootSpeed);
   }
   
   // Called once the command ends or is interrupted.
