@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.cameraserver.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,6 +48,7 @@ public class Robot extends TimedRobot {
     // gyro.calibr
     m_robotContainer = new RobotContainer();
     Shuffleboard.getTab("Example tab").add(gyro);
+    CameraServer.startAutomaticCapture();
   }
 
   /**

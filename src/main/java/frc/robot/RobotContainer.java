@@ -127,8 +127,8 @@ public class RobotContainer {
     // m_armController.a().whileTrue(m_ASCommand);
     // m_armController.b().whileTrue(m_BSCommand);
 
-    m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
-    m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
+    // m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
+    // m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
 
     // m_driverController.a().whileTrue(m_ACommand);
     // m_driverController.b().whileTrue(m_BCommand);
@@ -191,9 +191,9 @@ public class RobotContainer {
   public Command time3() {
     // Auton option 3 shoots then moves back
     
-    return shoot().andThen(
-      move(1.68, -1, 0)
-    );
+    return move(.28,-1,0)
+    .andThen(shoot()).andThen(
+      move(5, -1, 0));
 
 
   }
