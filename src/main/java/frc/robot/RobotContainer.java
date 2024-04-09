@@ -126,9 +126,10 @@ public class RobotContainer {
       InstantCommand(()->m_robotDrive.zeroHeading()));
     // m_armController.a().whileTrue(m_ASCommand);
     // m_armController.b().whileTrue(m_BSCommand);
-
-    // m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
-    // m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
+    
+    // you would want these uncomented if you want a working lift
+    m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
+    m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
 
     // m_driverController.a().whileTrue(m_ACommand);
     // m_driverController.b().whileTrue(m_BCommand);
