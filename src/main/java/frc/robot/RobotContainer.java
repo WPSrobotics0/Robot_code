@@ -126,12 +126,20 @@ public class RobotContainer {
       InstantCommand(()->m_robotDrive.zeroHeading()));
     // m_armController.a().whileTrue(m_ASCommand);
     // m_armController.b().whileTrue(m_BSCommand);
-    
+
     // you would want these uncomented if you want a working lift
     m_armController.rightBumper().whileTrue(m_ClimbExtendCommand);
     m_armController.leftBumper().whileTrue(m_ClimbRetractCommand);
 
-    // m_driverController.a().whileTrue(m_ACommand);
+    m_driverController.a().whileTrue(m_ShootNoteCommand);
+
+    //might work (potentail problem child)
+    if (m_armController.a() != null) {
+      m_ShooterSubsystem.shootSpeed=0.5;
+    }
+    else{
+      m_ShooterSubsystem.shootSpeed=1;
+    }
     // m_driverController.b().whileTrue(m_BCommand);
 
     chooser = new SendableChooser<Command>();
