@@ -151,6 +151,8 @@ public class RobotContainer {
     SmartDashboard.putData(chooser);
     chooser.addOption("Auton shoot then backward", time3());
     SmartDashboard.putData(chooser);
+    chooser.addOption("Just shoot", time4());
+    SmartDashboard.putData(chooser);
     ticks = 0;
     second = 50;
   }
@@ -205,6 +207,13 @@ public class RobotContainer {
     return move(.28,-1,0)
     .andThen(shoot()).andThen(
       move(5, -1, 0));
+
+
+  }
+  public Command time4() {
+    // Auton option 4 shoots
+    
+    return shoot();
 
 
   }
