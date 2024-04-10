@@ -134,9 +134,11 @@ public class RobotContainer {
     //might work (potentail problem child)
     if (RobotContainer.m_armController.a() != null) {
       m_ShooterSubsystem.shootSpeed=0.5;
+      SmartDashboard.putBoolean("aIsPressed", true);
     }
     else{
       m_ShooterSubsystem.shootSpeed=1;
+      SmartDashboard.putBoolean("aIsPressed", false);
     }
 
     m_armController.a().whileTrue(m_ShootNoteCommand);
